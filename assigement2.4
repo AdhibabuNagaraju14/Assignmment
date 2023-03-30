@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+void delete_by_index(int arr[], int *size, int index) {
+    int i;
+    for (i = index; i < *size - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+    *size = *size - 1;
+}
+
+void delete_by_value(int arr[], int *size, int value) {
+    int i, index = -1;
+    for (i = 0; i < *size; i++) {
+        if (arr[i] == value) {
+            index = i;
+            break;
+        }
+    }
+    if (index != -1) {
+        delete_by_index(arr, size, index);
+    }
+}
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    // Delete element by index
+    int index = 2;
+    delete_by_index(arr, &size, index);
+    printf("Array after deleting element at index %d:\n", index);
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    // Delete element by value
+    int value = 4;
+    delete_by_value(arr, &size, value);
+    printf("Array after deleting element with value %d:\n", value);
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
